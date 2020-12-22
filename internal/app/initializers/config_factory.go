@@ -25,7 +25,11 @@ var (
 	ErrIncorrectDefaultConfigsPaths = errors.New("incorrect default configs paths")
 )
 
-// TODO implement config factory
+//TODO implement config builder
+/*
+1. Initialize default service config with default JSON file/values
+2. Try to load service config from spf13/viper
+*/
 func ConfigFactory() (*config.ServiceConfig, error) {
 	cfg := &config.ServiceConfig{}
 

@@ -13,6 +13,7 @@ import (
 	ginmw "github.com/wajox/gin-ext-lib/middleware"
 )
 
+//TODO replace it with env/config value
 const maxAllowed = 20
 
 func InitializeKrakenD(
@@ -46,14 +47,12 @@ func newGinRouter(
 	engine.Use(ginmw.Recovery())
 
 	routerFactory := krakendgin.NewFactory(krakendgin.Config{
-		Engine:       gin.Default(),
-		ProxyFactory: customProxyFactory{logger, proxy.DefaultFactory(logger)},
-		Middlewares:  mws,
-		Logger:       logger,
-		HandlerFactory: func(configuration *config.EndpointConfig, proxy proxy.Proxy) gin.HandlerFunc {
-			return krakendgin.EndpointHandler(configuration, proxy)
-		},
-		RunServer: router.RunServer,
+		Engine:         engine,
+		ProxyFactory:   customProxyFactory{logger, proxy.DefaultFactory(logger)},
+		Middlewares:    mws,
+		Logger:         logger,
+		HandlerFactory: krakendgin.EndpointHandler,
+		RunServer:      router.RunServer,
 	})
 
 	return routerFactory.NewWithContext(ctx)
