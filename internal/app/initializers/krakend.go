@@ -20,16 +20,12 @@ func InitializeKrakenD(
 	ctx context.Context,
 	serviceConfig *config.ServiceConfig,
 	logger logging.Logger,
-) (router.Router, error) {
-	mws := newMws(serviceConfig)
-
-	r := newGinRouter(ctx, mws, logger)
-
-	go func() {
-		r.Run(*serviceConfig)
-	}()
-
-	return r, nil
+) router.Router {
+	return newGinRouter(
+		ctx,
+		newMws(serviceConfig),
+		logger,
+	)
 }
 
 func newMws(cfg *config.ServiceConfig) []gin.HandlerFunc {

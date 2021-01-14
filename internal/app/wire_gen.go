@@ -13,11 +13,11 @@ import (
 // Injectors from wire.go:
 
 func BuildApplication() (*Application, error) {
-	serviceConfig, err := initializers.ConfigFactory()
+	serviceConfig, err := initializers.InitializeConfig()
 	if err != nil {
 		return nil, err
 	}
-	logger, err := initializers.LoggerFactory()
+	logger, err := initializers.InitializeLogger()
 	if err != nil {
 		return nil, err
 	}

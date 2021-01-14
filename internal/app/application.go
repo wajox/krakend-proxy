@@ -41,14 +41,11 @@ func (a *Application) Start(ctx context.Context, cli bool) {
 }
 
 func (a *Application) StartKrakenD(ctx context.Context) {
-	_, err := initializers.InitializeKrakenD(
-		ctx,
-		a.Container.Cfg,
-		a.Container.Logger,
-	)
-	if err != nil {
-		log.Panic().Err(err).Msg("KrakendFactory failed")
-	}
+	r := initializers.InitializeKrakenD(ctx, a.Container.Cfg, a.Container.Logger)
+
+	go func() {
+		r.Run(*a.Container.Cfg)
+	}()
 }
 
 func (a *Application) Stop(reloaded bool) (err error) {

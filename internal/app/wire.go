@@ -10,8 +10,8 @@ import (
 
 func BuildApplication() (*Application, error) {
 	wire.Build(
-		initializers.LoggerFactory,
-		initializers.ConfigFactory,
+		initializers.InitializeLogger,
+		initializers.InitializeConfig,
 		wire.Struct(new(dependencies.Container), "Cfg", "Logger"),
 		wire.Struct(new(Application), "Container"),
 	)

@@ -6,6 +6,6 @@ import (
 	"github.com/wajox/krakend-proxy/internal/logging"
 )
 
-func LoggerFactory() (krakendlogs.Logger, error) {
+func InitializeLogger() (krakendlogs.Logger, error) {
 	return logging.NewLogger(envy.Get("KRAKEND_LOG_LEVEL", "DEBUG"))
 }

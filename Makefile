@@ -18,7 +18,7 @@ test-all:
 
 .PHONY: build
 build:
-	go build ${GOARGS} -tags "${GOTAGS}" -ldflags "${LDFLAGS}" -o ${BUILD_DIR}/app ./cmd/app
+	go build ${GOARGS} -tags "${GOTAGS}" -ldflags "${LDFLAGS}" -o ${BUILD_DIR}/app ./cmd/krakend-proxy
 
 gen:
 	go generate ./...
