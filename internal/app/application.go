@@ -6,6 +6,9 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/wajox/krakend-proxy/internal/app/dependencies"
 	"github.com/wajox/krakend-proxy/internal/app/initializers"
+
+	//nolint
+	_ "github.com/gobuffalo/envy"
 )
 
 type Application struct {
@@ -14,10 +17,6 @@ type Application struct {
 }
 
 func InitializeApplication() (*Application, error) {
-	if err := initializers.InitializeEnvs(); err != nil {
-		return nil, err
-	}
-
 	if err := initializers.InitializeLogs(); err != nil {
 		return nil, err
 	}
